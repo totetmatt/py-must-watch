@@ -40,12 +40,10 @@ pyMustWatchApp.controller('VideoListCtrl', function($scope, $http, $sce) {
     }
 
     $scope.selectVideo = function(videoObject) {
-        $scope.setCurrentVideo(videoObject);
-        if (player) {
-            var currentVideoId = $scope.youtubeIdFromUri($scope.currentVideo.videos.youtube);
-            player.loadVideoById(currentVideoId);
-        }
+        // http://stackoverflow.com/questions/14147677/youtube-iframe-api-on-internet-explorer-and-firefox
         $('#video-player-container').removeClass('hide');
-        $('html, body').animate({ scrollTop: 0 }, 150);
+        $('html, body').animate({ scrollTop: 0 }, 150,"swing");
+        $scope.setCurrentVideo(videoObject);     
     }
+  
 });

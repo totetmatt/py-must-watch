@@ -6,11 +6,24 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Creates an <iframe> (and YouTube player) after the YouTube API is loaded
 var player;
+
+function onPlayerReady(evt) {
+    var scope = angular.element($("body")).scope();
+    scope.$apply(function(){
+       var currentVideoId = scope.youtubeIdFromUri(scope.currentVideo.videos.youtube);
+       player.loadVideoById(currentVideoId);
+   })
+    
+}
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: calculatePlayerHeight().toString(),
         width: '100%',
-        videoId: null
+        videoId: null,
+        events: {
+            'onReady': onPlayerReady
+        }
     });
 
     $(window).resize(function() {
@@ -18,3 +31,4 @@ function onYouTubeIframeAPIReady() {
         player.setSize('100%', newPlayerHeight);
     });
 }
+
