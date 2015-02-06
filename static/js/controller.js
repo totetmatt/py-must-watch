@@ -5,9 +5,6 @@ pyMustWatchApp.controller('VideoListCtrl', function($scope, $http, $sce) {
     
     $http.get('./videos.json').success(function (data) {
         $scope.videos = data;
-        if ($scope.videos.length > 0) {
-            $scope.currentVideo = $scope.videos[0];
-        }
     });
 
     $scope.youtubeIdFromUri = function(uri) {
@@ -33,10 +30,14 @@ pyMustWatchApp.controller('VideoListCtrl', function($scope, $http, $sce) {
             var uri = $scope.currentVideo.videos.youtube;
             return $sce.trustAsResourceUrl(uri);
         }
+
     }
 
     $scope.setCurrentVideo = function(videoObject) {
         $scope.currentVideo = videoObject;
+        var currentVideoId = $scope.youtubeIdFromUri($scope.currentVideo.videos.youtube);
+        player.loadVideoById(currentVideoId);
+
     }
 
     $scope.selectVideo = function(videoObject) {
@@ -45,5 +46,5 @@ pyMustWatchApp.controller('VideoListCtrl', function($scope, $http, $sce) {
         $('html, body').animate({ scrollTop: 0 }, 150,"swing");
         $scope.setCurrentVideo(videoObject);     
     }
-  
+
 });

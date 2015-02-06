@@ -8,10 +8,14 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 
 function onPlayerReady(evt) {
+
+    
     var scope = angular.element($("body")).scope();
     scope.$apply(function(){
-       var currentVideoId = scope.youtubeIdFromUri(scope.currentVideo.videos.youtube);
-       player.loadVideoById(currentVideoId);
+        if(scope.currentVideo!==null) {
+            var currentVideoId = scope.youtubeIdFromUri(scope.currentVideo.videos.youtube);
+            player.loadVideoById(currentVideoId);
+       }
    })
     
 }

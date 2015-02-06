@@ -5,7 +5,7 @@ $(document).ready(function() {
 /**
  * Setup all the custom event handling of buttons etc. required.
  */
-function initEventHandlers() {
+ function initEventHandlers() {
     // The close button of the video player container
     $('#video-player-container-dismiss').click(function() {
         $('#video-player-container').addClass('hide');
@@ -21,7 +21,7 @@ function initEventHandlers() {
  *
  * By default, a 16:9 aspect ratio is used.
  */
-function calculatePlayerHeight(aspectRatio) {
+ function calculatePlayerHeight(aspectRatio) {
     if (!aspectRatio) {
         aspectRatio = 9.0 / 16.0;
     }
